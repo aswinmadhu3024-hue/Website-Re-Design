@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TinkerHub CET | Drishti 2026</title>
+
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://unpkg.com/lucide@latest"></script>
+
+  <link rel="stylesheet" href="style.css">
+
+</head>
+<body class="min-h-screen flex flex-col justify-between">
+
+  <!-- Easter Egg Modal -->
+  <div id="easter-egg-modal" class="hidden fixed inset-0 bg-black/80 z-50 flex items-center justify-center p-4">
+    <div class="glass rounded-2xl p-6 max-w-md w-full text-center border-2 border-amber-500">
+      <h3 class="text-2xl font-bold text-amber-400 font-heading mb-2">🎉 You Found the Easter Egg!</h3>
+      <p class="text-slate-300 text-sm mb-4">You tinkered around and clicked the hidden gear icon. You're a true maker at heart!</p>
+      <button onclick="toggleEasterEgg()" class="bg-amber-500 hover:bg-amber-600 text-slate-900 font-bold px-4 py-2 rounded-lg transition">Close Secret</button>
+    </div>
+  </div>
+
+  <!-- Mobile Menu Drawer -->
+  <div id="mobile-menu" class="hidden md:hidden fixed inset-x-0 top-20 bg-slate-900/95 border-b border-slate-800 p-6 z-30">
+    <nav class="flex flex-col space-y-4 font-medium text-slate-300">
+      <a href="#about" onclick="toggleMobileMenu()" class="hover:text-amber-400 transition">About</a>
+      <a href="#events" onclick="toggleMobileMenu()" class="hover:text-amber-400 transition">Events</a>
+      <a href="#maker-kootam" onclick="toggleMobileMenu()" class="hover:text-amber-400 transition">Maker Kootam</a>
+      <a href="#history" onclick="toggleMobileMenu()" class="hover:text-amber-400 transition">History</a>
+      <a href="#team" onclick="toggleMobileMenu()" class="hover:text-amber-400 transition">Team</a>
+      <a href="#contact" onclick="toggleMobileMenu()" class="hover:text-amber-400 transition">Contact</a>
+    </nav>
+  </div>
+
+  <!-- Navigation Bar -->
+  <header class="sticky top-0 z-40 backdrop-blur-md bg-slate-900/80 border-b border-slate-800">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+      <a href="#hero" class="flex items-center gap-2">
+        <div class="w-10 h-10 rounded-xl bg-blue-600 flex items-center justify-center text-white font-bold text-xl">T</div>
+        <span class="font-heading font-bold text-xl text-white">TinkerHub <span class="text-amber-400">CET</span></span>
+      </a>
+
+      <nav class="hidden md:flex space-x-6 text-sm font-medium text-slate-300">
+        <a href="#about" class="hover:text-amber-400 transition">About</a>
+        <a href="#events" class="hover:text-amber-400 transition">Events</a>
+        <a href="#maker-kootam" class="hover:text-amber-400 transition">Maker Kootam</a>
+        <a href="#history" class="hover:text-amber-400 transition">History</a>
+        <a href="#team" class="hover:text-amber-400 transition">Team</a>
+        <a href="#contact" class="hover:text-amber-400 transition">Contact</a>
+      </nav>
+
+      <div class="flex items-center gap-2">
+        <button id="theme-toggle" class="theme-switch" type="button" aria-label="Toggle theme" title="Toggle theme">
+          <span class="theme-switch-track">
+            <span class="theme-sun">☀️</span>
+            <span class="theme-moon">🌙</span>
+            <span class="theme-switch-circle">
+              <span class="theme-icon">☀️</span>
+            </span>
+          </span>
+        </button>
+
+        <button onclick="toggleEasterEgg()" title="Tinker Secret" class="p-2 text-slate-400 hover:text-amber-400 transition">
+          <i data-lucide="settings" class="w-5 h-5"></i>
+        </button>
+
+        <button onclick="toggleMobileMenu()" class="md:hidden p-2 text-slate-400 hover:text-white">
+          <i data-lucide="menu" class="w-6 h-6"></i>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main class="flex-grow">
+    <!-- Hero Section -->
+    <section id="hero" class="relative min-h-[85vh] flex items-center justify-center px-4 py-16 overflow-hidden">
+      <canvas id="hero-canvas" class="absolute inset-0 w-full h-full pointer-events-none z-0"></canvas>
+      <div class="relative z-10 max-w-3xl mx-auto text-center space-y-6">
+        <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full glass border border-amber-500/30 text-amber-400 text-xs font-medium">
+          <span class="w-2 h-2 rounded-full bg-amber-400 animate-ping"></span> Drishti 2026 x TinkerHub CET
+        </div>
+        <h1 class="text-4xl sm:text-6xl font-bold text-white leading-tight font-heading">
+          Where <span class="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-teal-300 to-amber-400">Curiosity</span> Meets Creation.
+        </h1>
+        <p class="text-slate-300 text-base sm:text-lg">Reimagining how CETians learn, build, and innovate together through peer-to-peer technology exploration.</p>
+        <div class="flex flex-wrap items-center justify-center gap-4 pt-2">
+          <a href="#maker-kootam" class="px-6 py-3 bg-amber-500 hover:bg-amber-600 text-slate-900 font-bold rounded-xl transition">Explore Projects</a>
+          <a href="#about" class="px-6 py-3 glass hover:bg-slate-800 text-white font-semibold rounded-xl transition">Discover Culture</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="py-16 px-4 max-w-7xl mx-auto">
+      <div class="text-center max-w-2xl mx-auto mb-12">
+        <h2 class="text-3xl font-bold font-heading text-white">About TinkerHub CET</h2>
+        <p class="text-slate-400 text-sm mt-2">A student community dedicated to learning, sharing, and building together.</p>
+      </div>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <div class="glass p-6 rounded-2xl space-y-3">
+          <div class="w-10 h-10 bg-blue-500/10 rounded-lg flex items-center justify-center text-blue-400"><i data-lucide="cpu" class="w-5 h-5"></i></div>
+          <h3 class="text-lg font-bold text-white font-heading">Learn by Doing</h3>
+          <p class="text-slate-400 text-sm">Hands-on bootcamps, practical workshops, and real projects form our core learning engine.</p>
+        </div>
+        <div class="glass p-6 rounded-2xl space-y-3">
+          <div class="w-10 h-10 bg-amber-500/10 rounded-lg flex items-center justify-center text-amber-400"><i data-lucide="users" class="w-5 h-5"></i></div>
+          <h3 class="text-lg font-bold text-white font-heading">Peer Learning</h3>
+          <p class="text-slate-400 text-sm">Students mentor students in an inclusive space where everyone learns and grows together.</p>
+        </div>
+        <div class="glass p-6 rounded-2xl space-y-3">
+          <div class="w-10 h-10 bg-teal-500/10 rounded-lg flex items-center justify-center text-teal-400"><i data-lucide="rocket" class="w-5 h-5"></i></div>
+          <h3 class="text-lg font-bold text-white font-heading">Open Culture</h3>
+          <p class="text-slate-400 text-sm">We embrace open-source values—sharing code, documenting builds, and growing collectively.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Events Section -->
+    <section id="events" class="py-16 px-4 max-w-7xl mx-auto">
+      <div class="flex flex-col md:flex-row md:items-end justify-between mb-8 gap-4">
+        <div>
+          <h2 class="text-3xl font-bold font-heading text-white">Events & Activities</h2>
+          <p class="text-slate-400 text-sm mt-1">Workshops and hackathons conducted by our community.</p>
+        </div>
+        <div class="flex gap-2">
+          <button onclick="filterEvents('all', this)" class="event-filter-btn px-4 py-2 text-xs font-semibold rounded-lg bg-blue-600 text-white">All</button>
+          <button onclick="filterEvents('hackathon', this)" class="event-filter-btn px-4 py-2 text-xs font-semibold rounded-lg glass text-slate-300 hover:text-white">Hackathons</button>
+          <button onclick="filterEvents('workshop', this)" class="event-filter-btn px-4 py-2 text-xs font-semibold rounded-lg glass text-slate-300 hover:text-white">Workshops</button>
+        </div>
+      </div>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6" id="events-grid">
+        <div class="event-card hackathon glass p-6 rounded-2xl flex flex-col justify-between">
+          <div class="space-y-2">
+            <span class="px-3 py-1 bg-amber-500/20 text-amber-400 text-xs font-bold rounded-full inline-block">Hackathon</span>
+            <h3 class="text-lg font-bold text-white font-heading">Hack-A-Tinker 2026</h3>
+            <p class="text-slate-400 text-sm">Annual flagship hackathon building solutions for real-world problems.</p>
+          </div>
+          <div class="pt-4 mt-4 border-t border-slate-800 flex justify-between text-xs text-slate-400">
+            <span>CET Campus</span>
+            <span class="text-teal-400 font-semibold">Completed</span>
+          </div>
+        </div>
+        <div class="event-card workshop glass p-6 rounded-2xl flex flex-col justify-between">
+          <div class="space-y-2">
+            <span class="px-3 py-1 bg-blue-500/20 text-blue-400 text-xs font-bold rounded-full inline-block">Workshop</span>
+            <h3 class="text-lg font-bold text-white font-heading">AI & ML Starter Sprint</h3>
+            <p class="text-slate-400 text-sm">Hands-on starter workshop covering Python and Neural Network basics.</p>
+          </div>
+          <div class="pt-4 mt-4 border-t border-slate-800 flex justify-between text-xs text-slate-400">
+            <span>Hybrid</span>
+            <span class="text-amber-400 font-semibold">Upcoming</span>
+          </div>
+        </div>
+        <div class="event-card workshop glass p-6 rounded-2xl flex flex-col justify-between">
+          <div class="space-y-2">
+            <span class="px-3 py-1 bg-teal-500/20 text-teal-400 text-xs font-bold rounded-full inline-block">Workshop</span>
+            <h3 class="text-lg font-bold text-white font-heading">Web3 & Smart Contracts</h3>
+            <p class="text-slate-400 text-sm">Interactive session on blockchain architecture and app development.</p>
+          </div>
+          <div class="pt-4 mt-4 border-t border-slate-800 flex justify-between text-xs text-slate-400">
+            <span>Seminar Hall</span>
+            <span class="text-teal-400 font-semibold">Completed</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Maker Kootam Section -->
+    <section id="maker-kootam" class="py-16 px-4 max-w-7xl mx-auto">
+      <div class="text-center max-w-2xl mx-auto mb-12">
+        <h2 class="text-3xl font-bold font-heading text-white">Maker Kootam & Projects</h2>
+        <p class="text-slate-400 text-sm mt-1">Innovative hardware and software built by community members.</p>
+      </div>
+      <div class="grid grid-cols-1 sm:grid-cols-3 gap-6">
+        <div class="glass rounded-2xl p-6 space-y-3">
+          <div class="text-amber-400"><i data-lucide="bot" class="w-6 h-6"></i></div>
+          <h3 class="text-lg font-bold text-white font-heading">Autonomous Campus Rover</h3>
+          <p class="text-slate-400 text-sm">Robotic rover for intra-campus parcel delivery using ROS and OpenCV.</p>
+        </div>
+        <div class="glass rounded-2xl p-6 space-y-3">
+          <div class="text-teal-400"><i data-lucide="globe" class="w-6 h-6"></i></div>
+          <h3 class="text-lg font-bold text-white font-heading">Smart Energy Dashboard</h3>
+          <p class="text-slate-400 text-sm">Real-time IoT energy monitoring system to track campus lab power usage.</p>
+        </div>
+        <div class="glass rounded-2xl p-6 space-y-3">
+          <div class="text-blue-400"><i data-lucide="code" class="w-6 h-6"></i></div>
+          <h3 class="text-lg font-bold text-white font-heading">Open Campus API</h3>
+          <p class="text-slate-400 text-sm">Community API providing unified access to timetables and event alerts.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- History Section -->
+    <section id="history" class="py-16 px-4 max-w-3xl mx-auto">
+      <div class="text-center mb-12">
+        <h2 class="text-3xl font-bold font-heading text-white">Into the History</h2>
+        <p class="text-slate-400 text-sm mt-1">The evolution of TinkerHub CET through the years.</p>
+      </div>
+      <div class="relative border-l border-slate-700 ml-4 space-y-8">
+        <div class="pl-6 relative">
+          <div class="absolute -left-2 top-1.5 w-4 h-4 rounded-full bg-amber-500"></div>
+          <span class="text-xs font-bold text-amber-400">2021</span>
+          <h3 class="text-base font-bold text-white font-heading">Chapter Founded</h3>
+          <p class="text-slate-400 text-sm">TinkerHub CET launched to foster peer-to-peer technical learning.</p>
+        </div>
+        <div class="pl-6 relative">
+          <div class="absolute -left-2 top-1.5 w-4 h-4 rounded-full bg-blue-500"></div>
+          <span class="text-xs font-bold text-blue-400">2023</span>
+          <h3 class="text-base font-bold text-white font-heading">Maker Space Era</h3>
+          <p class="text-slate-400 text-sm">Expanded maker spaces across physical labs and digital channels.</p>
+        </div>
+        <div class="pl-6 relative">
+          <div class="absolute -left-2 top-1.5 w-4 h-4 rounded-full bg-teal-500"></div>
+          <span class="text-xs font-bold text-teal-400">2026</span>
+          <h3 class="text-base font-bold text-white font-heading">Drishti Redesign</h3>
+          <p class="text-slate-400 text-sm">Modernizing web representation and project archives for the community.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Team Section -->
+    <section id="team" class="py-16 px-4 max-w-7xl mx-auto">
+      <div class="text-center max-w-2xl mx-auto mb-12">
+        <h2 class="text-3xl font-bold font-heading text-white">Current Execom Team</h2>
+        <p class="text-slate-400 text-sm mt-1">The student leads building TinkerHub CET.</p>
+      </div>
+      <div class="grid grid-cols-2 sm:grid-cols-4 gap-4">
+        <div class="glass p-6 rounded-2xl text-center space-y-2">
+          <div class="w-16 h-16 mx-auto rounded-full bg-slate-800 flex items-center justify-center font-bold text-amber-400 border border-amber-500/30">TH</div>
+          <h3 class="font-bold text-white font-heading text-sm">Campus Lead</h3>
+          <p class="text-slate-400 text-xs">Execom 2026</p>
+        </div>
+        <div class="glass p-6 rounded-2xl text-center space-y-2">
+          <div class="w-16 h-16 mx-auto rounded-full bg-slate-800 flex items-center justify-center font-bold text-blue-400 border border-blue-500/30">TH</div>
+          <h3 class="font-bold text-white font-heading text-sm">Tech Lead</h3>
+          <p class="text-slate-400 text-xs">Execom 2026</p>
+        </div>
+        <div class="glass p-6 rounded-2xl text-center space-y-2">
+          <div class="w-16 h-16 mx-auto rounded-full bg-slate-800 flex items-center justify-center font-bold text-teal-400 border border-teal-500/30">TH</div>
+          <h3 class="font-bold text-white font-heading text-sm">Operations Lead</h3>
+          <p class="text-slate-400 text-xs">Execom 2026</p>
+        </div>
+        <div class="glass p-6 rounded-2xl text-center space-y-2">
+          <div class="w-16 h-16 mx-auto rounded-full bg-slate-800 flex items-center justify-center font-bold text-purple-400 border border-purple-500/30">TH</div>
+          <h3 class="font-bold text-white font-heading text-sm">Design Lead</h3>
+          <p class="text-slate-400 text-xs">Execom 2026</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="py-16 px-4 max-w-3xl mx-auto">
+      <div class="glass p-8 rounded-3xl text-center space-y-4">
+        <h2 class="text-3xl font-bold font-heading text-white">Get in Touch</h2>
+        <p class="text-slate-300 text-sm">Have ideas or want to collaborate with TinkerHub CET?</p>
+        <div class="flex flex-wrap justify-center gap-4 pt-2">
+          <a href="https://tinkerhub.org/" target="_blank" class="px-5 py-2.5 bg-amber-500 hover:bg-amber-600 text-slate-900 font-bold rounded-xl text-sm transition">Official Site</a>
+          <a href="https://tinkerhubcet.github.io/" target="_blank" class="px-5 py-2.5 glass hover:bg-slate-800 text-white font-semibold rounded-xl text-sm transition">GitHub Page</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="border-t border-slate-800 py-6 text-center text-slate-500 text-xs">
+    <p>© 2026 TinkerHub CET x Drishti Challenge. Designed for makers.</p>
+  </footer>
+
+  <script>
+    const themeToggle = document.getElementById("theme-toggle");
+    const themeIcon = document.querySelector(".theme-icon");
+
+    function applyTheme(theme) {
+      const isLight = theme === "light";
+      document.body.classList.toggle("light-mode", isLight);
+
+      if (themeIcon) {
+        themeIcon.textContent = isLight ? "🌙" : "☀️";
+      }
+
+      localStorage.setItem("theme", theme);
+    }
+
+    const savedTheme = localStorage.getItem("theme") || "dark";
+    applyTheme(savedTheme);
+
+    if (themeToggle) {
+      themeToggle.addEventListener("click", () => {
+        const nextTheme = document.body.classList.contains("light-mode") ? "dark" : "light";
+        applyTheme(nextTheme);
+      });
+    }
+  </script>
+
+  <script src="script.js"></script>
+</body>
+</html>
